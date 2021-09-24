@@ -1,0 +1,27 @@
+version: '3'
+services: 
+    dsvendas-pg12:
+        container_name: dsvendas-pg12
+        image: postgres:12-alpine
+        ports: 
+            - 5432:5432
+        networks:
+            - dsvendas
+        environment: 
+            - POSTGRES_DB=dsvendas
+            - POSTGRES_PASSWORD=1234567
+
+    dsvendas-pgadmin4:
+        container_name: dsvendas-pgadmin4
+        image: dpage/pgadmin4
+        ports: 
+            - 15432:80
+        networks:
+            - dsvendas
+        environment: 
+            - PGADMIN_DEFAULT_EMAIL=abc@email.com
+            - PGADMIN_DEFAULT_PASSWORD=1234567
+
+networks:
+  dsvendas:
+    driver: bridge
